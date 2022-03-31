@@ -49,4 +49,12 @@ public class Address {
         this.streetAddress = streetAddress;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return
+                "City:" + city + "\n" +
+                "Zipcode:" + zipCode + "\n" +
+                "Address" + streetAddress + "\n";
+    }
 }

@@ -80,4 +80,15 @@ public class Victim {
         this.crimes = crimes;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Victim{" +
+                ", First name:'" + firstName + '\'' +
+                ", Last name:'" + lastName + '\'' +
+                ", Date of birth:" + dateOfBirth +
+                ", Address: " + address +
+                ", Exposed for this crimes:" + crimes +
+                '}';
+    }
 }
