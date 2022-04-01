@@ -17,30 +17,82 @@
  <div class="p-3 mb-2 bg-info text-dark">
                                             <div class="row">
                                               <div class="col">
-                                                <p>Press <a th:href="@{/showCategories}"> here</a> to access categories </p>
+                                                <h1>Welcome to the crime database! </h1>
                                               </div>
                                               <div class="col">
-                                                Column
+                                                <h1>Welcome to the crime database! </h1>
                                               </div>
                                               <div class="col">
-                                                Column
+
                                               </div>
                                             </div>
-                                          </div> </p>
- </div>
-<div class="container">
+                                          </div>
 
-  <h1>Welcome to the crime database! </h1>
-  <p>Press <a th:href="@{/showCategories}"> here</a> to access categories </p>
-  <p>Press <a th:href="@{/showCriminals}">here</a> to show all criminals</p>
-  <p>Press <a th:href="@{/showAddresses}">here</a> to show all addresses</p>
-  <p>Press <a th:href="@{/showCrimes}"> here </a> to show all crimes</p>
-  <p>Press <a th:href="@{/showVictims}"> here </a> to show all victims</p>
 
-  <img src="images/police.png" />
+
+
+
+
+
+    <div class="card" style="width: 15rem;">
+      <img src="images/category.png" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">Categories</h5>
+        <p class="card-text">Here you can handle different crime categories</p>
+        <a th:href="@{/showCategories}" class="btn btn-primary">Category</a>
+      </div>
+
+    <div class="card" style="width: 15rem;">
+    <img src="images/crime.png" class="card-img-top">
+    <div class="card-body">
+    <h5 class="card-title">Crimes</h5>
+    <p class="card-text">Here you can handle crimes and modify victims, criminals and address </p>
+    <a th:href="@{/showCrimes}" class="btn btn-primary">Crimes</a>
+    </div>
 </div>
 
+    <div class="card" style="width: 15rem;">
+    <img src="images/criminal.png" class="card-img-top">
+    <div class="card-body">
+    <h5 class="card-title">Criminals</h5>
+    <p class="card-text">Here you can handle criminals and modify first and lastname, birthdate and crimes. </p>
+    <a th:href="@{/showCriminals}" class="btn btn-primary">Criminals</a>
+    </div>
 
+    <div class="card" style="width: 15rem;">
+      <img src="images/user.png" class="card-img-top">
+      <div class="card-body">
+      <h5 class="card-title">Users</h5>
+      <p class="card-text">Here you can handle users and change roles </p>
+      <a th:href="@{/showUsers}" class="btn btn-primary">Users</a>
+      </div>
+
+    <div class="card" style="width: 15rem;">
+      <img src="images/address.png" class="card-img-top">
+      <div class="card-body">
+      <h5 class="card-title">Addresses</h5>
+      <p class="card-text">Here you can handle addresses and change city, zipcode and street address </p>
+      <a th:href="@{/showAddresses}" class="btn btn-primary">Addresses</a>
+      </div>
+
+    <div class="card" style="width: 15rem;">
+      <img src="images/victim.png" class="card-img-top">
+      <div class="card-body">
+      <h5 class="card-title">Victims</h5>
+      <p class="card-text">Here you can handle victims and modify first and lastname, birthdate, addresses and crimes. </p>
+      <a th:href="@{/showVictims}" class="btn btn-primary">Victims</a>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+  <img src="images/police.png" />
+</div>
 
 </body>
 </html>
