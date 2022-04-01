@@ -38,7 +38,7 @@ public class CategoriesThymeleafController {
     }
 
     @PostMapping("/saveCategory")
-    public String saveEmployee(@ModelAttribute Category category) {
+    public String saveCategory(@ModelAttribute Category category) {
         service.create(category);
         return "redirect:/showCategories";
     }
