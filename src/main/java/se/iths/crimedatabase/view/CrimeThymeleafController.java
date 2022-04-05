@@ -1,7 +1,7 @@
 package se.iths.crimedatabase.view;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +16,6 @@ import se.iths.crimedatabase.service.CategoryService;
 import se.iths.crimedatabase.service.CrimeService;
 import se.iths.crimedatabase.service.CriminalService;
 
-import java.util.List;
-
 @Controller
 public class CrimeThymeleafController {
 
@@ -27,6 +25,7 @@ public class CrimeThymeleafController {
     private final CriminalService criminalService;
 
 
+    @Autowired
     public CrimeThymeleafController(CrimeService service, CategoryService categoryService, AddressService addressService, CriminalService criminalService) {
         this.service = service;
         this.categoryService = categoryService;
@@ -48,7 +47,7 @@ public class CrimeThymeleafController {
         return mav;
     }
 
-    @GetMapping("/showCrimes")
+    @GetMapping("/crimes")
     public ModelAndView showCrimes() {
         ModelAndView mav = new ModelAndView("list-crimes");
         Iterable<Crime> allCrimes = service.findAll();
@@ -59,10 +58,10 @@ public class CrimeThymeleafController {
     @PostMapping("/saveCrime")
     public String saveCrime(@ModelAttribute Crime crime) {
         service.create(crime);
-        return "redirect:/showCrimes";
+        return "redirect:/crimes";
     }
 
-    @GetMapping("/showCrimeUpdateForm")
+    @GetMapping("/crimeUpdateForm")
     public ModelAndView showCrimeUpdateForm(@RequestParam Long id) {
         ModelAndView mav = new ModelAndView("add-crime-form");
         Crime crime = service.findById(id).orElseThrow();
@@ -73,10 +72,8 @@ public class CrimeThymeleafController {
     @GetMapping("/deleteCrime")
     public String deleteCrime(@RequestParam Long id) {
         service.delete(id);
-        return "redirect:/showCrimes";
+        return "redirect:/crimes";
     }
-
-
 
 
 }

@@ -29,7 +29,7 @@
                         <td th:text="${criminal.lastName}"></td>
                         <td th:text="${criminal.dateOfBirth}"></td>
                         <td>
-                            <a th:href="@{/showCriminalUpdateForm(id=${criminal.id})}" class="btn btn-info">Update</a>
+                            <a th:href="@{/criminalUpdateForm(id=${criminal.id})}" class="btn btn-info">Update</a>
                             <a th:href="@{/deleteCriminal(id=${criminal.id})}" class="btn btn-danger ml-2">Delete</a>
                          </td>
                     </tr>

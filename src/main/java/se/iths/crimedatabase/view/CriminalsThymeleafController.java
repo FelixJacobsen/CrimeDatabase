@@ -20,7 +20,7 @@ public class CriminalsThymeleafController {
         this.service = service;
     }
 
-   @GetMapping("/showCriminals")
+   @GetMapping("/criminals")
     public ModelAndView showCriminals() {
         ModelAndView mav = new ModelAndView("list-criminals");
         Iterable<Criminal> allCriminals = service.findAll();
@@ -39,10 +39,10 @@ public class CriminalsThymeleafController {
     @PostMapping("/saveCriminal")
     public String saveCriminal(@ModelAttribute Criminal criminal) {
         service.create(criminal);
-        return "redirect:/showCriminals";
+        return "redirect:/criminals";
     }
 
-    @GetMapping("/showCriminalUpdateForm")
+    @GetMapping("/criminalUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long id) {
         ModelAndView mav = new ModelAndView("add-criminal-form");
         Criminal criminal = service.findById(id).orElseThrow();
@@ -53,7 +53,7 @@ public class CriminalsThymeleafController {
     @GetMapping("/deleteCriminal")
     public String deleteCriminal(@RequestParam Long id) {
         service.delete(id);
-        return "redirect:/showCriminals";
+        return "redirect:/criminals";
     }
 
 }
