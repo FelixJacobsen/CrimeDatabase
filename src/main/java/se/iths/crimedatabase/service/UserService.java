@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import se.iths.crimedatabase.entity.User;
 import se.iths.crimedatabase.repository.UserRepository;
 
-import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -15,24 +15,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User create(User user){
+    public User create(User user) {
         return userRepository.save(user);
     }
 
-    public void delete(Long id){
-        User foundUser = userRepository.findById(id).orElseThrow(EntityExistsException::new);
+    public void delete(Long id) {
+        User foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         userRepository.deleteById(foundUser.getId());
     }
 
-    public Optional<User> findById(Long id){
+    public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
 
-    public Iterable<User> findAll(){
+    public Iterable<User> findAll() {
         return userRepository.findAll();
     }
 
-    public void update(User user, Long id){
+    public void update(User user, Long id) {
         user.setId(id);
         userRepository.save(user);
     }

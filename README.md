@@ -1,18 +1,20 @@
 # CrimeDatabase
+
 ![Release](https://img.shields.io/github/v/release/Patlenlix/CrimeDatabase)
 ![repo_size](https://img.shields.io/github/repo-size/Patlenlix/CrimeDatabase)
-
 
 ## Java Enterprise | ITHS | JU21
 
 A Spring Boot application handling crimes, criminals and victims which is stored in a MySQL database. Different roles
 have different degree of access throughout the application.
 
-### E/R diagram
+## 1. E/R diagram
 
 ![ER Diagram](src/main/resources/static/images/ERdiagram.png)
 
 ---
+
+## 2. Features
 
 ### Done [Live features]
 
@@ -35,43 +37,87 @@ have different degree of access throughout the application.
 
 ---
 
-### Deployment
+## 3. Deployment
 
-1. Clone/Fork this repo in your favorite IDE
-    - Go to the folder where you want the application to save 
+### Alternative 1: Download/Clone Repository
+
+- Download the [Latest Release](https://github.com/Patlenlix/CrimeDatabase/releases)
+    - Unzip the compressed file where you want to save the application
+
+**OR**
+
+- Clone the repository
+    - Go to the folder where you want the application to save
     - Run the following from your Console: `git clone https://github.com/Patlenlix/CrimeDatabase.git`
-3. Install Docker Desktop
-4. Run the application:
-    - Go to the folder of the application 
+
+**RUN APPLICATION: ALTERNATIVE 1**
+
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (and run it)
+2. Go to the folder of the application
+    - Run the following from your Console: `docker-compose up`(If it doesn't work the first time, try to run it again).
+
+### Alternative 2: Download docker image
+
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (and run it)
+2. Create a `docker-compose.yml` file that looks like this:
+
+```
+version: '3.8'
+
+services:
+  backend:
+    image: ghcr.io/patlenlix/crimedatabase:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+```
+
+**RUN APPLICATION: ALTERNATIVE 2**
+
+1. Go to the folder of the `docker-compose.yml` file
     - Run the following from your Console: `docker-compose up`
-5. Use Insomnia to run the endpoints below
-    - Use Basic Auth:
-        - Admin:
+
+### How to Interact with the application (both Alternatives)
+
+1. Use `Insomnia` to run the endpoints below
+    - Use `Basic Auth`:
+        - **Admin**:
             - Username: admin
             - Password: admin123
-        - User:
+        - **User**:
             - Username: user
             - Password: user123
-6. To access RabbitMQ console to manage messaging service
+2. To access `RabbitMQ` console to manage messaging service
     - Go to: `http://localhost:15672`
         - Username: guest
         - Password: guest
 
 ---
 
-### Endpoints
+## 4. Endpoints
 
-All URLs start with `http://localhost:8080`
+All URLs for our API start with `http://localhost:8080/api`
 
 #### Category:
 
-| HTTP-verb | URL              | Authorization           | Info                            |
-|-----------|------------------|-------------------------|---------------------------------|
-| POST      | /categories      | All authenticated users | Creates category                |
-| DELETE    | /categories/{id} | All authenticated users | Deletes category with id = {id} |
-| GET       | /categories/{id} | All authenticated users | Returns category with id = {id} |
-| GET       | /categories      | All authenticated users | Returns all categories          |
-| PUT       | /categories/{id} | All authenticated users | Updates category with id = {id} |
+| HTTP-verb | URL              | Authorization                        | Info                            |
+|-----------|------------------|--------------------------------------|---------------------------------|
+| POST      | /categories      | Authenticated users with role ADMIN  | Creates category                |
+| DELETE    | /categories/{id} | Authenticated users with role ADMIN  | Deletes category with id = {id} |
+| GET       | /categories/{id} | Authenticated users with role ADMIN  | Returns category with id = {id} |
+| GET       | /categories      | Authenticated users with role ADMIN  | Returns all categories          |
+| PUT       | /categories/{id} | Authenticated users with role ADMIN  | Updates category with id = {id} |
 
 POST and PUT needs a Body with a JSON object. Example of body for POST (PUT also needs id):
 
@@ -123,13 +169,13 @@ POST and PUT needs a Body with a JSON object. Example of body for POST (PUT also
 
 #### Address:
 
-| HTTP-verb | URL                | Authorization           | Info                           |
-|-----------|--------------------|-------------------------|--------------------------------|
-| POST      | /addresses         | All authenticated users | Creates address                |
-| DELETE    | /addresses/{id}    | All authenticated users | Deletes address with id = {id} |
-| GET       | /addresses/{id}    | All authenticated users | Returns address with id = {id} |
-| GET       | /addresses         | All authenticated users | Returns all addresses          |
-| PUT       | /addresses/{id}    | All authenticated users | Updates address with id = {id} |
+| HTTP-verb | URL                | Authorization                       | Info                           |
+|-----------|--------------------|-------------------------------------|--------------------------------|
+| POST      | /addresses         | Authenticated users with role ADMIN | Creates address                |
+| DELETE    | /addresses/{id}    | Authenticated users with role ADMIN | Deletes address with id = {id} |
+| GET       | /addresses/{id}    | Authenticated users with role ADMIN | Returns address with id = {id} |
+| GET       | /addresses         | Authenticated users with role ADMIN | Returns all addresses          |
+| PUT       | /addresses/{id}    | Authenticated users with role ADMIN | Updates address with id = {id} |
 
 POST and PUT needs a Body with a JSON object. Example of body for POST (PUT also needs id):
 
@@ -143,13 +189,13 @@ POST and PUT needs a Body with a JSON object. Example of body for POST (PUT also
 
 #### Crime:
 
-| HTTP-verb | URL              | Authorization           | Info                           |
-|-----------|------------------|-------------------------|--------------------------------|
-| POST      | /crimes          | All authenticated users | Creates crime                  |
-| DELETE    | /crimes/{id}     | All authenticated users | Deletes crime with id = {id}   |
-| GET       | /crimes/{id}     | All authenticated users | Returns crime with id = {id}   |
-| GET       | /crimes          | All authenticated users | Returns all crimes             |
-| PUT       | /crimes/{id}     | All authenticated users | Updates crime with id = {id}   |
+| HTTP-verb | URL              | Authorization                        | Info                           |
+|-----------|------------------|--------------------------------------|--------------------------------|
+| POST      | /crimes          | Authenticated users with role ADMIN  | Creates crime                  |
+| DELETE    | /crimes/{id}     | Authenticated users with role ADMIN  | Deletes crime with id = {id}   |
+| GET       | /crimes/{id}     | Authenticated users with role ADMIN  | Returns crime with id = {id}   |
+| GET       | /crimes          | Authenticated users with role ADMIN  | Returns all crimes             |
+| PUT       | /crimes/{id}     | Authenticated users with role ADMIN  | Updates crime with id = {id}   |
 
 POST and PUT needs a Body with a JSON object. Example of body for POST (PUT also needs id):
 
