@@ -17,10 +17,12 @@
                 <table class="table table-bordered table-striped" id="category-table">
             <thead>
                 <tr>
-                    <th>firstName</th>
-                    <th>lastName</th>
-                    <th>dateOfBirth</th>
-
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Date of birth</th>
+                    <th>Location</th>
+                    <th>Crimes committed</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
                 <tbody>
@@ -28,6 +30,8 @@
                         <td th:text="${criminal.firstName}"></td>
                         <td th:text="${criminal.lastName}"></td>
                         <td th:text="${criminal.dateOfBirth}"></td>
+                        <td th:text="${criminal.address}"></td>
+                        <td th:text="${criminal.crimes}"></td>
                         <td>
                             <a th:href="@{/criminalUpdateForm(id=${criminal.id})}" class="btn btn-info">Update</a>
                             <a th:href="@{/deleteCriminal(id=${criminal.id})}" class="btn btn-danger ml-2">Delete</a>
