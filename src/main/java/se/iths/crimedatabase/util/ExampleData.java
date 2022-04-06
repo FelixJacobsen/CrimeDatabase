@@ -1,10 +1,12 @@
 package se.iths.crimedatabase.util;
 
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import se.iths.crimedatabase.repository.*;
 
 @Component
-public class ExampleData {
+public class ExampleData implements ApplicationRunner {
 
     private AddressRepository addressRepository;
     private VictimRepository victimRepository;
@@ -20,4 +22,9 @@ public class ExampleData {
         this.categoryRepository = categoryRepository;
     }
 
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        
+    }
 }
